@@ -1,4 +1,16 @@
+
 body{
     font-family: 'Source Serif Pro', serif;
+    background-image: url("./images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: 125%;
+    text-align: center;
+    color: white;
+    font-size: 18px;
+};
 
+
+.trainInfo{
+    color: white;
 }
+

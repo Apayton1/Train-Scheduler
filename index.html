@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./assets/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    
+    <title>T</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid main bg-transparent">
+            <div class="container">
+                <h1 class="display-4">Trains By The Time</h1>
+
+            </div>
+        </div>
+
+
+        <div class='mainTable border bg-primary rounded'>
+            <div class='card-panel trainInfo'>
+                <h4 class='center-align'>Current Train Schedule</h4>
+                <table class="table striped center bordered responsive-table" id='trainSchedulesTable'>
+                    <thead>
+                        <tr>
+                            <th>Train Station Name</th>
+                            <th>Destination</th>
+                            <th>Frequency (minutes)</th>
+                            <th>Next Arrival</th>
+                            <th>Minutes Away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- <div class="table">
+            <div class="row">
+                <div class="col">
+                    <p>Train Name</p>
+                </div>
+                <div class="col">
+                    <p>Destination</p>
+                </div>
+                <div class="col">
+                    <p>Frequency (min)</p>
+                </div>
+                <div class="col">
+                    <p>Next Arrival</p>
+                </div>
+                <div class="col">
+                    <p>Minutes Away</p>
+                </div>
+        </div> -->
+
+        <br>
+        <br>
+        <br>
+
+        <form>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Train Name</label>
+                <input type="email" class="form-control" id="trainNameText">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Destination</label>
+                <input type="email" class="form-control" id="destinationText">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">First Train Time (hh:mm - military time)</label>
+                <input type="email" class="form-control" id="firstTrainText">
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Frequency (min)</label>
+                <input type="email" class="form-control" id="frequencyText">
+            </div>
+            <br>
+            <br>
+            <button type="button" class="btn btn-primary" id="submit">Submit</button>
+
+        </form>
+
+        <br>
+        <br>
+        <br>
+
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <!-- Specific Firebase products we want (Database) -->
+    <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
+    <script src="./assets/app.js"></script>
+
+</body>
+
+</html>
