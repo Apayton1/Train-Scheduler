@@ -22,13 +22,13 @@ $("#submit").on("click", function () {
   var frequency = $("#frequencyText").val();
   var currentTime = moment();
   console.log(moment());
-  var firstTrainConverted = moment(firstTrain, "hh:mm").subtract("1, years");
-  var difference = currentTime.diff(moment(firstTrain));
-  var minutesAway =
+  
+  var difference = currentTime.diff(moment(firstTrainConverted), "minutes");
 
 
 
-    console.log('Name: ' + trainName);
+
+  console.log('Name: ' + trainName);
   console.log('Destination: ' + destination);
   console.log('First Train: ' + firstTrain);
   console.log('Frequency: ' + frequency);
@@ -37,13 +37,14 @@ $("#submit").on("click", function () {
     name: trainName,
     destination: destination,
     frequency: frequency,
-    firstTrainTime: firstTrain
+    firstTrainTime: firstTrain,
+    
   });
 
   /// Clear text elements.
   $("#trainNameText").val("");
   $("#destinationText").val("");
-  $("#firstText").val("");
+  $("#firstTrainText").val("");
   $("#frequencyText").val("");
 })
 
@@ -58,10 +59,11 @@ firebase.database().ref().on('child_added', function (snapshot) {
   var destination = current.destination;
   var firstTrain = current.firstTrainTime;
   var frequency = current.frequency;
+  
   //var minutesAway = 
 
 
-  $("#trainSchedulesTable").append("<tr><td>" + trainName + '</td><td>' + destination + '</td><td>' + firstTrain + '</td><td>' + frequency + "</td><td></td>")
+  $("#trainSchedulesTable").append("<tr><td>" + trainName + '</td><td>' + destination + '</td><td>' + frequency + "</td><td></td>")
 
   /// Display current item in the console.
   console.log(current);
