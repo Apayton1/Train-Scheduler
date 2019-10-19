@@ -20,13 +20,6 @@ $("#submit").on("click", function () {
   var destination = $("#destinationText").val();
   var firstTrain = $("#firstTrainText").val();
   var frequency = $("#frequencyText").val();
-  var currentTime = moment();
-  console.log(moment());
-  
-  var difference = currentTime.diff(moment(firstTrainConverted), "minutes");
-
-
-
 
   console.log('Name: ' + trainName);
   console.log('Destination: ' + destination);
@@ -37,8 +30,7 @@ $("#submit").on("click", function () {
     name: trainName,
     destination: destination,
     frequency: frequency,
-    firstTrainTime: firstTrain,
-    
+    firstTrainTime: firstTrain
   });
 
   /// Clear text elements.
@@ -59,11 +51,44 @@ firebase.database().ref().on('child_added', function (snapshot) {
   var destination = current.destination;
   var firstTrain = current.firstTrainTime;
   var frequency = current.frequency;
-  
-  //var minutesAway = 
+
+  var firstTrainTimeArray = firstTrain.split( ':' );
+  var firstTrainTime = moment().hours( firstTrainTimeArray[ 0 ] ).minutes( firstTrainTimeArray[ 1 ] );
+
+  var trainMinutes;
+  var trainArrival;
+  var maxTrainTime = moment.max( moment(), firstTrainTime );
+
+  if ( maxTrainTime === firstTrainTime ) {
+    trainArrival = firstTrainTime.format( "hh:mm A" );
+    trainMinutes = firstTrainTime.diff( moment(), "minutes" );
+  } else {
+    // Calculate the minutes until arrival using hardcore math
+    // To calculate the minutes till arrival, take the current time in unix subtract the FirstTrain time
+    // and find the modulus between the difference and the frequency.
+    var differenceTimes = moment().diff( firstTrainTime, "minutes");
+    var trainRemainder = differenceTimes % frequency;
+    trainMinutes = frequency - trainRemainder;
+
+    // To calculate the arrival time, add the tMinutes to the current time
+    trainArrival = moment()
+      .add( trainMinutes, "m" )
+      .format( "hh:mm A" );
+  }
+
+  console.log( "Train Minutes: ", trainMinutes );
+  console.log( "Train Arrival: ", trainArrival );
 
 
-  $("#trainSchedulesTable").append("<tr><td>" + trainName + '</td><td>' + destination + '</td><td>' + frequency + "</td><td></td>")
+  $("#trainSchedulesTable").append(
+    '<tr>' + 
+      '<td>' + trainName + '</td>' + 
+      '<td>' + destination + '</td>' + 
+      '<td>' + frequency + '</td>' + 
+      '<td>' + trainArrival + '</td>' + 
+      '<td>' + trainMinutes + '</td>' + 
+    '</tr>'
+  );
 
   /// Display current item in the console.
   console.log(current);
